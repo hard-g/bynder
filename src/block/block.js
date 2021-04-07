@@ -195,7 +195,7 @@ addFilter(
 										<CompactView
 											language={cgbGlobal.language}
 											assetTypes={["IMAGE"]}
-											assetFieldSelection={assetFieldSelection}
+											/*assetFieldSelection={assetFieldSelection}*/
 											onSuccess={addToGallery}
 											defaultSearchTerm={cgbGlobal.bynderDefaultSearchTerm}
 										/>
@@ -263,6 +263,17 @@ registerBlockType("bynder/bynder-asset-block", {
 		var addAsset = assets => {
 			const asset = assets[0];
 			var block;
+
+			let caption = ''
+			if ( asset.hasOwnProperty( 'textMetaproperties' ) ) {
+				asset.textMetaproperties.forEach(function(v,k){
+					if ( v.name === 'caption' ) {
+						caption = v.value
+						return
+					}
+				})
+			}
+
 			switch (asset.type) {
 				case "IMAGE":
 					var file = asset.files[cgbGlobal.bynderImageDerivative] || asset.files.webImage;
@@ -270,7 +281,8 @@ registerBlockType("bynder/bynder-asset-block", {
 					block = createBlock("core/image", {
 						// Fetching the webimage derivative by default
 						url: file.url,
-						alt: asset.name,
+						alt: caption,
+						caption: caption,
 						bynder: asset.databaseId
 					});
 					break;
@@ -318,7 +330,7 @@ registerBlockType("bynder/bynder-asset-block", {
 							language={cgbGlobal.language}
 							mode="SingleSelect"
 							assetTypes={assetTypes}
-							assetFieldSelection={assetFieldSelection}
+							/*assetFieldSelection={assetFieldSelection}*/
 							onSuccess={addAsset}
 							defaultSearchTerm={cgbGlobal.bynderDefaultSearchTerm}
 						/>
@@ -422,7 +434,7 @@ registerBlockType("bynder/bynder-gallery-block", {
 						<CompactView
 							language={cgbGlobal.language}
 							assetTypes={["IMAGE"]}
-							assetFieldSelection={assetFieldSelection}
+							/*assetFieldSelection={assetFieldSelection}*/
 							onSuccess={addGallery}
 							defaultSearchTerm={cgbGlobal.bynderDefaultSearchTerm}
 						/>
