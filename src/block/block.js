@@ -179,13 +179,13 @@ addFilter(
 
 			return (
 				<Fragment>
-					<div class="bynder-gallery">
+					<div className="bynder-gallery">
 						<BlockEdit {...props} />
-						<div class="compact-view-button">
+						<div className="compact-view-button">
 							<React.Fragment>
 								<button
 									onClick={openModal}
-									class="components-button button button-large"
+									className="components-button button button-large"
 								>
 									Open Compact View
 								</button>
@@ -319,7 +319,7 @@ registerBlockType("bynder/bynder-asset-block", {
 			<React.Fragment>
 				<button
 					onClick={openModal}
-					class="components-button button button-large"
+					className="components-button button button-large"
 				>
 					Open Compact View
 				</button>
@@ -424,7 +424,7 @@ registerBlockType("bynder/bynder-gallery-block", {
 			<React.Fragment>
 				<button
 					onClick={openModal}
-					class="components-button button button-large"
+					className="components-button button button-large"
 				>
 					Open Compact View
 				</button>
