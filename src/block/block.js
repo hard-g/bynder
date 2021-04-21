@@ -25,6 +25,19 @@ const bynderLogo = props => (
 	</svg>
 );
 
+const getCaptionFromAsset = function( asset ) {
+	let caption = ''
+	if ( asset.hasOwnProperty( 'textMetaproperties' ) ) {
+		asset.textMetaproperties.forEach(function(v,k){
+			if ( v.name === 'caption' ) {
+				caption = v.value
+				return
+			}
+		})
+	}
+	return caption
+}
+
 const assetTypes = ["IMAGE", "VIDEO", "DOCUMENT"];
 const assetFieldSelection = `
   databaseId
@@ -167,6 +180,7 @@ addFilter(
 					return {
 						url: asset.derivatives.webImage,
 						alt: asset.name,
+						caption: getCaptionFromAsset( asset ),
 						bynder: asset.databaseId
 					};
 				});
@@ -264,19 +278,11 @@ registerBlockType("bynder/bynder-asset-block", {
 			const asset = assets[0];
 			var block;
 
-			let caption = ''
-			if ( asset.hasOwnProperty( 'textMetaproperties' ) ) {
-				asset.textMetaproperties.forEach(function(v,k){
-					if ( v.name === 'caption' ) {
-						caption = v.value
-						return
-					}
-				})
-			}
-
 			switch (asset.type) {
 				case "IMAGE":
 					var file = asset.files[cgbGlobal.bynderImageDerivative] || asset.files.webImage;
+					
+					const caption = getCaptionFromAsset( asset )
 
 					block = createBlock("core/image", {
 						// Fetching the webimage derivative by default
@@ -404,12 +410,12 @@ registerBlockType("bynder/bynder-gallery-block", {
 
 		var addGallery = assets => {
 			var galleryImages = assets.map(asset => {
-				console.log(asset);
 				var file = asset.files[cgbGlobal.bynderImageDerivative] || asset.files.webImage;
 				return {
 					url: file.url,
 					alt: asset.name,
-					bynder: asset.databaseId
+					bynder: asset.databaseId,
+					caption: getCaptionFromAsset( asset )
 				};
 			});
 			var block = createBlock("core/gallery", {

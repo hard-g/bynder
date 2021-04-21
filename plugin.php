@@ -4,7 +4,7 @@
  * Description: Allows users to easily import and use their Bynder images and videos directly in WordPress, helping brands save time and maintain consistency. Requires at least WordPress 5.0. Tested up to WordPress 5.3.
  * Author: Bynder BV
  * Author URI: https://www.bynder.com/
- * Version: 4.1.1
+ * Version: 4.1.1.1
  *
  * @package bynder-wordpress
  * @author Bynder
