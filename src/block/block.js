@@ -143,7 +143,14 @@ addFilter(
 								createElement("img", {
 									src: image.url,
 									alt: image.alt
-								})
+								}),
+								createElement(
+									"figcaption",
+									{
+										className: "blocks-gallery-item__caption"
+									},
+									image.caption
+								)
 							)
 						);
 					})
